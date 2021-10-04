@@ -1,12 +1,15 @@
+// Set constants for the cache name
 const APP_PREFIX = 'BudgetTrack-';
 const VERSION = 'version_01';
 const CACHE_NAME = APP_PREFIX + VERSION;
 
+// Files that need to be cached are index.html and the css styles file
 const FILES_TO_CACHE = [
     "./index.html",
     "./css/styles.css"
 ];
 
+// Install the service worker
 self.addEventListener('install', function (e) {
     e.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
@@ -16,6 +19,7 @@ self.addEventListener('install', function (e) {
     )
 })
 
+// Activate the service worker
 self.addEventListener('activate', function (e) {
     e.waitUntil(
         caches.keys().then(function (keyList) {
@@ -36,6 +40,9 @@ self.addEventListener('activate', function (e) {
     );
 });
 
+// When there is a fetch request, check to see if cached
+// If cached, return the cached version
+// If not cached, fetch the remote webpage
 self.addEventListener('fetch', function (e) {
     console.log('fetch request : ' + e.request.url)
     e.respondWith(

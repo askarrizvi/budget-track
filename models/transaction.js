@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Create a new schema for transaction that takes name and value
+// A default date value of the current date is added automatically
 const transactionSchema = new Schema(
   {
     name: {
